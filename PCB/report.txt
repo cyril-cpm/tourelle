@@ -1,0 +1,11 @@
+Info: X scale constrained.
+Info: Y scale constrained.
+Plotted to '/home/cpm/Pupitre/PCB/PCB-F_Cu.gbr'.
+Plotted to '/home/cpm/Pupitre/PCB/PCB-B_Cu.gbr'.
+Plotted to '/home/cpm/Pupitre/PCB/PCB-F_Silkscreen.gbr'.
+Plotted to '/home/cpm/Pupitre/PCB/PCB-B_Silkscreen.gbr'.
+Plotted to '/home/cpm/Pupitre/PCB/PCB-F_Mask.gbr'.
+Plotted to '/home/cpm/Pupitre/PCB/PCB-B_Mask.gbr'.
+Plotted to '/home/cpm/Pupitre/PCB/PCB-Edge_Cuts.gbr'.
+Created Gerber job file '/home/cpm/Pupitre/PCB/PCB-job.gbrjob'.
+Info: Done.

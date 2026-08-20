@@ -1,0 +1,3 @@
+[submodule "Settingator"]
+	path = firmware/components/Settingator
+	url = git@github.com:cyril-cpm/SettingatorLib.git

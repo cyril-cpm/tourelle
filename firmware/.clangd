@@ -1,0 +1,32 @@
+Diagnostics:
+	Suppress: [
+		"-Wvla-cxx-extension",
+		"member_function_call_bad_type",
+		"unknown_typename",
+		"redefinition_different_typedef",
+		"pp_file_not_found",
+		"init_conversion_failed",
+		"typecheck_convert_incompatible_pointer",
+		"field_incomplete_or_sizeless"
+		]
+	UnusedIncludes: None
+
+CompileFlags:
+	Add: [
+
+	  "-isysroot=/home/cpm/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20251107/xtensa-esp-elf/xtensa-esp-elf",
+	  "-isystem/home/cpm/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20251107/xtensa-esp-elf/xtensa-esp-elf/include/c++/14.2.0",
+	  "-isystem/home/cpm/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20251107/xtensa-esp-elf/xtensa-esp-elf/include/c++/14.2.0/xtensa-esp-elf",
+	  "-isystem/home/cpm/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20251107/xtensa-esp-elf/lib/gcc/xtensa-esp-elf/14.2.0/include-fixed",
+	  "-isystem/home/cpm/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20251107/xtensa-esp-elf/lib/gcc/xtensa-esp-elf/14.2.0/include",
+	  "-isystem/home/cpm/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20251107/xtensa-esp-elf/picolibc/include",
+	  "-isystem/home/cpm/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20251107/xtensa-esp-elf/xtensa-esp-elf/include"
+
+	]
+	Remove: [
+		"-fno-shrink-wrap",
+		"-fno-tree-switch-conversion",
+		"-fstrict-volatile-bitfields",
+		"-mlongcalls",
+		"-mdisable-hardware-atomics"
+	]
