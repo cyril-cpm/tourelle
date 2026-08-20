@@ -1,3 +1,6 @@
 [submodule "Settingator"]
 	path = firmware/components/Settingator
 	url = git@github.com:cyril-cpm/SettingatorLib.git
+[submodule "HP_ESP32Servo"]
+	path = firmware/components/HP_ESP32Servo
+	url = git@github.com:cyril-cpm/HP_ESP32Servo.git

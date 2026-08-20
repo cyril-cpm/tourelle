@@ -1,6 +1,6 @@
 Function;Pin;Description
 
-PWM_0;GPIO_11;
+PWM_0;GPIO_27;
 PWM_1;GPIO_14;
 PWM_2;GPIO_12;
 
