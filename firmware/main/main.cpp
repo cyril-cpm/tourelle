@@ -5,6 +5,7 @@
 #include "driver/gpio.h"
 #include "Led.h"
 #include "HP_ESP32Servo.h"
+#include "STServo.h"
 
 Settingator& STR = Settingator::GetInstance();
 
@@ -15,6 +16,11 @@ Settingator& STR = Settingator::GetInstance();
 Servo pwm0(PWM_0_PIN);
 Servo pwm1(PWM_1_PIN);
 Servo pwm2(PWM_2_PIN);
+
+STServoHandler STS(26, 25, 1000000, UART_NUM_2);
+STServo servo(0x01);
+
+STR_UInt16 pos(0, "POS");
 
 #define HID_0 GPIO_NUM_16
 #define HID_1 GPIO_NUM_17
@@ -30,6 +36,7 @@ static void IRAM_ATTR buttonHandler(void* args)
 
 extern "C" void app_main(void)
 {
+	pos.SetCallback([](){ servo.SetTargetPosition(pos); });
 	gpio_config_t pushButtonConfig = {
 		.pin_bit_mask =
 				(1ULL << HID_0) +
@@ -63,6 +70,9 @@ extern "C" void app_main(void)
 	pwm0.write(10);
 	pwm1.write(90.0f);
 	pwm2.write(170.0f);
+
+	servo.SetMaxAngle(32737);
+	servo.SetTargetPosition(8192);
 
 	ESP_LOGI("MAIN", "TEST");
 	while (true)

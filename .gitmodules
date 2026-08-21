@@ -4,3 +4,6 @@
 [submodule "HP_ESP32Servo"]
 	path = firmware/components/HP_ESP32Servo
 	url = git@github.com:cyril-cpm/HP_ESP32Servo.git
+[submodule "STServo"]
+	path = firmware/components/STServo
+	url = git@github.com:cyril-cpm/STServo.git

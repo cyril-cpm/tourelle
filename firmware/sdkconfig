@@ -718,7 +718,6 @@ CONFIG_STR_NB_SETTINGS=1
 # CONFIG_STR_MASTER_UART0 is not set
 # default:
 # CONFIG_STR_MASTER_UART1 is not set
-# default:
 # CONFIG_STR_MASTER_UART2 is not set
 # default:
 # CONFIG_STR_MASTER_ESPNOW is not set
