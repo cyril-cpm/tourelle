@@ -13,9 +13,9 @@ Settingator& STR = Settingator::GetInstance();
 #define PWM_1_PIN GPIO_NUM_14
 #define PWM_2_PIN GPIO_NUM_12
 
-Servo pwm0(PWM_0_PIN);
-Servo pwm1(PWM_1_PIN);
-Servo pwm2(PWM_2_PIN);
+Servo pwm0(PWM_0_PIN, true);
+Servo pwm1(PWM_1_PIN, true);
+Servo pwm2(PWM_2_PIN, true);
 
 STServoHandler STS(26, 25, 1000000, UART_NUM_2);
 STServo servo(0x01);
@@ -47,15 +47,15 @@ extern "C" void app_main(void)
 		.intr_type = GPIO_INTR_DISABLE,
 	};
 
-	ESP_ERROR_CHECK(gpio_config(&pushButtonConfig));
-
-	ESP_ERROR_CHECK(gpio_install_isr_service(0));
-
-	ESP_ERROR_CHECK(gpio_isr_handler_add(HID_0, buttonHandler, &hid0Pressed));
-	ESP_ERROR_CHECK(gpio_isr_handler_add(HID_1, buttonHandler, &hid1Pressed));
-
-	ESP_ERROR_CHECK(gpio_set_intr_type(HID_0, GPIO_INTR_POSEDGE));
-	ESP_ERROR_CHECK(gpio_set_intr_type(HID_1, GPIO_INTR_POSEDGE));
+	// ESP_ERROR_CHECK(gpio_config(&pushButtonConfig));
+	//
+	// ESP_ERROR_CHECK(gpio_install_isr_service(0));
+	//
+	// ESP_ERROR_CHECK(gpio_isr_handler_add(HID_0, buttonHandler, &hid0Pressed));
+	// ESP_ERROR_CHECK(gpio_isr_handler_add(HID_1, buttonHandler, &hid1Pressed));
+	//
+	// ESP_ERROR_CHECK(gpio_set_intr_type(HID_0, GPIO_INTR_POSEDGE));
+	// ESP_ERROR_CHECK(gpio_set_intr_type(HID_1, GPIO_INTR_POSEDGE));
 
 	for (auto i = 0; i < LS_0_LEN; i++)
 		Led::GetInstance().Strip0()[i] = RGB(255, 0, 0);
@@ -67,9 +67,9 @@ extern "C" void app_main(void)
 	InitCores();
 	STR.begin();
 
-	pwm0.write(10);
-	pwm1.write(90.0f);
-	pwm2.write(170.0f);
+	pwm0.write(5.0f);
+	pwm1.write(180.0f);
+	pwm2.write(180.0f);
 
 	servo.SetMaxAngle(32737);
 	servo.SetTargetPosition(8192);
