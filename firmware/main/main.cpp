@@ -20,10 +20,11 @@ Servo pwm2(PWM_2_PIN, true);
 STServoHandler STS(26, 25, 1000000, UART_NUM_2);
 STServo servo(0x01);
 
-STR_UInt16 pos(0, "POS");
-STR_Float pwm0Pos(0.0f, "0_POS");
-STR_Float pwm1Pos(0.0f, "1_POS");
-STR_Float pwm2Pos(0.0f, "2_POS");
+STR_UInt8 shoot(0, "SHOOT");
+
+TimerHandle_t shooting0Timer;
+TimerHandle_t shooting1Timer;
+TimerHandle_t shooting2Timer;
 
 #define HID_0 GPIO_NUM_16
 #define HID_1 GPIO_NUM_17
@@ -39,7 +40,6 @@ static void IRAM_ATTR buttonHandler(void* args)
 
 extern "C" void app_main(void)
 {
-	pos.SetCallback([](){ servo.SetTargetPosition(pos); });
 	gpio_config_t pushButtonConfig = {
 		.pin_bit_mask =
 				(1ULL << HID_0) +
@@ -70,9 +70,55 @@ extern "C" void app_main(void)
 	servo.SetMaxAngle(32737);
 	servo.SetTargetPosition(8192);
 
-	pwm0Pos.SetCallback([]() {  pwm0.write(pwm0Pos); });
-	pwm1Pos.SetCallback([]() { pwm1.write(pwm1Pos); });
-	pwm2Pos.SetCallback([]() { pwm2.write(pwm2Pos); });
+	shooting0Timer = xTimerCreate(
+			"shooting0Timer",
+			pdMS_TO_TICKS(1000),
+			pdFALSE,
+			nullptr,
+			[](TimerHandle_t timer) {
+				pwm0.write(0.0f);
+			}
+		);
+
+	shooting1Timer = xTimerCreate(
+			"shooting1Timer",
+			pdMS_TO_TICKS(1000),
+			pdFALSE,
+			nullptr,
+			[](TimerHandle_t timer) {
+				pwm1.write(0.0f);
+			}
+		);
+
+	shooting2Timer = xTimerCreate(
+			"shooting2Timer",
+			pdMS_TO_TICKS(1000),
+			pdFALSE,
+			nullptr,
+			[](TimerHandle_t timer) {
+				pwm2.write(0.0f);
+			}
+		);
+
+	shoot.SetCallback([]() {
+			if (shoot & 0b001)
+			{
+				pwm0.write(25.0f);
+				xTimerStart(shooting0Timer, 0);
+			}
+			
+			if (shoot & 0b010)
+			{
+				pwm1.write(25.0f);
+				xTimerStart(shooting1Timer, 0);
+			}
+
+			if (shoot & 0b10)
+			{
+				pwm2.write(25.0f);
+				xTimerStart(shooting2Timer, 0);
+			}
+		});
 
 	ESP_LOGI("MAIN", "TEST");
 	while (true)
