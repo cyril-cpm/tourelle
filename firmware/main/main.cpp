@@ -113,7 +113,7 @@ extern "C" void app_main(void)
 				xTimerStart(shooting1Timer, 0);
 			}
 
-			if (shoot & 0b10)
+			if (shoot & 0b100)
 			{
 				pwm2.write(25.0f);
 				xTimerStart(shooting2Timer, 0);
